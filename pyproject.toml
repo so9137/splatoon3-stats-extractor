@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "splatoon3-stats-extractor"
+version = "0.1.0"
+description = ""
+authors = ["so9137 <so.x.9137@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pytesseract = "^0.3.13"
+pillow = "^11.2.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
