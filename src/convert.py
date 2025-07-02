@@ -1,18 +1,20 @@
-import re
 import json
-import uuid
+import re
 import sys
-from pathlib import Path
+import uuid
 from datetime import datetime
+from pathlib import Path
+
+from const import rules_dict, x_power_patterns_dict, keywords_dict
 
 
-def parse_splatoon3_log(ocr_text: str) -> dict:
+def parse_splatoon3_log(ocr_text: str, lang: str) -> dict:
     lines = [line.strip() for line in ocr_text.splitlines() if line.strip()]
-    
+
     # Extract X Power
     x_power = None
     for line in lines:
-        m = re.match(r"X Power[:\s]+([\d\.]+)", line, re.IGNORECASE)
+        m = re.match(x_power_patterns_dict[lang], line, re.IGNORECASE)
         if m:
             x_power = m.group(1)
             break
@@ -20,7 +22,7 @@ def parse_splatoon3_log(ocr_text: str) -> dict:
         raise ValueError("X Power not found in the text.")
 
     # Determine rule
-    rules = ["Splat Zones", "Tower Control", "Rainmaker", "Clam Blitz"]
+    rules = rules_dict.get(lang)
     rule = None
     for line in lines:
         for r in rules:
@@ -35,17 +37,27 @@ def parse_splatoon3_log(ocr_text: str) -> dict:
     results = []
     scores = []
     stages = []
+    keywords = keywords_dict[lang]
+    victory_keyword = keywords["victory"]
+    defeat_keyword = keywords["defeat"]
+    score_keyword = keywords["score"]
+    score_prefix = keywords["score_prefix"]
+    knockout_keyword = keywords["knockout"]
 
     # Extract results, scores, and stages
     for line in lines:
-        if "victory" in line.lower() or "defeat" in line.lower():
-            results.append(line)
-        elif "score" in line.lower() or "knockout" in line.lower():
-            score = line.replace("Score: ", "").replace("!", "").strip()
+        if victory_keyword in line.lower() or defeat_keyword in line.lower():
+            results.append(line.replace("!", "").replace(".", ""))
+        elif score_keyword in line.lower() or knockout_keyword in line.lower():
+            score = line.replace(score_prefix, "").replace("!", "").replace("◎", "0").replace("！","").strip()
             scores.append(score)
         elif rule.lower() in line.lower():
             stage = line.replace(rule, "").strip()
             stages.append(stage)
+
+    print("results:", results)
+    print("scores:", scores)
+    print("stages:", stages)
 
     # Verify that we have the same number of results, scores, and stages
     if not (len(results) == len(scores) == len(stages)):
@@ -73,17 +85,18 @@ def parse_splatoon3_log(ocr_text: str) -> dict:
     }
 
 
-def main(txt_path: Path, json_out: Path):
+def main(txt_path: Path, json_out: Path, lang: str = "en"):
     ocr_text = txt_path.read_text(encoding="utf-8")
-    parsed = parse_splatoon3_log(ocr_text)
+    parsed = parse_splatoon3_log(ocr_text, lang)
     json_out.write_text(json.dumps(parsed, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"✅ Parsed JSON written to {json_out}")
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
+    if len(sys.argv) != 4:
         print("Usage: python convert.py ../resource/input.txt ../out/output.json")
         sys.exit(1)
     input_file = Path(sys.argv[1])
     output_file = Path(sys.argv[2])
-    main(input_file, output_file)
+    lang = sys.argv[3].lower()
+    main(input_file, output_file, lang)
