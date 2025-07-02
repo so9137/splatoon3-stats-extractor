@@ -1,0 +1,23 @@
+{
+  "datetime": "2025-07-02T22:50:23.660011",
+  "set_id": "f3d29870-61cb-4a2a-8194-664696cb0668",
+  "x_power": "1929.4",
+  "rule": "Splat Zones",
+  "battles": [
+    {
+      "result": "VICTORY",
+      "score": "KNOCKOUT",
+      "stage": "Hammerhead Bridge"
+    },
+    {
+      "result": "VICTORY",
+      "score": "KNOCKOUT",
+      "stage": "Museum d'Alfonsino"
+    },
+    {
+      "result": "VICTORY",
+      "score": "93",
+      "stage": "Museum d'Alfonsino"
+    }
+  ]
+}
