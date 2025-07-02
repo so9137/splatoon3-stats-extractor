@@ -1,0 +1,33 @@
+{
+  "datetime": "2025-07-03T00:19:41.440924",
+  "set_id": "ffc790e9-9275-4f26-81dc-ec97586710d6",
+  "x_power": "1731.2",
+  "rule": "ガチアサリ",
+  "battles": [
+    {
+      "result": "LOSE",
+      "score": "0カウント",
+      "stage": "タカアシ経済特区"
+    },
+    {
+      "result": "LOSE",
+      "score": "74カウント",
+      "stage": "ゴンズイ地区"
+    },
+    {
+      "result": "WIN",
+      "score": "ノックアウト",
+      "stage": "ゴンズイ地区"
+    },
+    {
+      "result": "WIN",
+      "score": "41カウント",
+      "stage": "タカアシ経済特区"
+    },
+    {
+      "result": "LOSE",
+      "score": "20カウント",
+      "stage": "タカアシ経済特区"
+    }
+  ]
+}
