@@ -9,6 +9,8 @@ readme = "README.md"
 python = "^3.10"
 pytesseract = "^0.3.13"
 pillow = "^11.2.1"
+requests = "^2.32.5"
+opensearch-py = "^3.1.0"
 
 
 [build-system]
