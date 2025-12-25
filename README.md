@@ -37,6 +37,11 @@ This project automates the process of fetching your Splatoon 3 X-Match battle da
     - OpenSearch Dashboards will be available at `http://localhost:5601`.
     - *Note: Data is persisted in the `opensearch-data` Docker volume.*
 
+4.  **Manage OpenSearch**:
+    - **Stop**: `docker-compose down`
+    - **Restart**: `docker-compose restart`
+    - **View Logs**: `docker-compose logs -f`
+
 ## Usage
 
 Run the script using `poetry run python src/main.py`.
