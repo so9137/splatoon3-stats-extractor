@@ -77,9 +77,9 @@ class StatInkFetcher:
             # Client-side validation just in case, but server should handle it now
             xmatch_battles = [b for b in data if b.get('lobby', {}).get('key') == 'xmatch']
             if len(xmatch_battles) < len(data):
-                 logger.warning(f"Server returned {len(data)-len(xmatch_battles)} non-xmatch battles despite filter. Discarding.")
+                 logger.warning(f"Server returned {len(data)-len(xmatch_battles)} non-x battles despite filter. Discarding.")
             
-            logger.info(f"Fetch complete. Retrieved {len(xmatch_battles)} X-Match battles.")
+            logger.info(f"Fetch complete. Retrieved {len(xmatch_battles)} X Battles.")
             return xmatch_battles
             
         except requests.RequestException as e:

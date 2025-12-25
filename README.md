@@ -1,10 +1,10 @@
 # Splatoon 3 Stats Extractor
 
-This project automates the process of fetching your Splatoon 3 X-Match battle data from [stat.ink](https://stat.ink), transforming it into an analysis-friendly format, and indexing it into a local OpenSearch instance for visualization.
+This project automates the process of fetching your Splatoon 3 X Battle data from [stat.ink](https://stat.ink), transforming it into an analysis-friendly format, and indexing it into a local OpenSearch instance for visualization.
 
 ## Features
 
-- **X-Match Only**: Strictly filters and processes only X-Match battles.
+- **X Battle Only**: Strictly filters and processes only X Battles.
 - **Detailed Player Stats**: detailed statistics (kills, deaths, weapon, special, etc.) for all 8 players in every match.
 - **Efficient Fetching**: Uses single-request timestamp-based filtering to minimize API load.
 - **Backfill & Daily Modes**: Easily backfill historical data (last 3 weeks) or fetch the latest daily battles.
@@ -47,7 +47,7 @@ This project automates the process of fetching your Splatoon 3 X-Match battle da
 Run the script using `poetry run python src/main.py`.
 
 ### 1. Backfill History (Recommended First Run)
-Fetch the last 3 weeks (max limit) of X-Match battles.
+Fetch the last 3 weeks (max limit) of X Battles.
 ```bash
 poetry run python src/main.py --mode backfill --days 21 --username <YOUR_STAT_INK_USERNAME> --purge
 ```
